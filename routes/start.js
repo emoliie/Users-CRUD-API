@@ -4,7 +4,6 @@ const express = require("express");
 const UsersController = require("../controllers/UsersController");
 const AuthentificationController = require("../controllers/AuthentificationController"); // on exporte que le controller donc pas d'{}
 const { authenticateToken } = require("../middlewares/Auth"); // destructuration : on exporte un objet de fonction (plein de fonction) c'est pq les {}
-
 const router = express.Router();
 
 router.get("/users", UsersController.index); // affiche /users
