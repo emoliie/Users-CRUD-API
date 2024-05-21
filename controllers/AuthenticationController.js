@@ -2,7 +2,7 @@ const prisma = require("../config/prisma");
 const { comparePassword } = require("../utils/bcrypt");
 const { generateAccessToken } = require("../utils/jwt");
 
-class AuthentificationController {
+class AuthenticationController {
   async login(req, res) {
     try {
       const body = req.body;
@@ -32,8 +32,19 @@ class AuthentificationController {
   }
 
   async getMyProfile(req, res) {
-    return res.status(200).json({ user: req.user });
+    let data = {};
+    const ownedCards = await prisma.ownedCard.findMany({ // owned
+      where: {
+        userid: req.user.id
+      }
+    })
+
+    data["user"] = req.user
+    data["ownedCards"] = ownedCards
+    console.log(data)
+
+    return res.status(200).json(data) // on retourne un objet contenant les valeurs de user et ownedCards 
   }
 }
 
-module.exports = new AuthentificationController();
+module.exports = new AuthenticationController();

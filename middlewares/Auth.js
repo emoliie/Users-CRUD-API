@@ -1,11 +1,14 @@
 // fonction prend en param le token et verifie si token valide ou pas
 
 const jwt = require("jsonwebtoken");
-const prisma = require("../config/prisma")
+const prisma = require("../config/prisma");
+require("dotenv").config();
 
-function authenticateToken(req, res, next) {
+function authMiddleware(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
+
+  console.log("Trying to authenticate with token " + token);
 
   if (token == null) {
     return res.sendStatus(401);
@@ -37,4 +40,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-module.exports = { authenticateToken };
+module.exports = { authMiddleware };

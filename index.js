@@ -12,8 +12,12 @@ app.use(cors());
 
 app.use(express.json()); // converti en json(?)
 
+
 app.use("/", require("./routes/start")); // on defini quel router utiliser
-app.use("/", require("./routes/house")); 
+
+app.use("/", require("./routes/house"));
+
+app.use("/", require("./routes/draw"));
 
 // global.lastHouseVisited = null; // défini une variable globale disponible partout
 

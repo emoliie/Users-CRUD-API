@@ -8,12 +8,15 @@ datasource db {
 }
 
 model User {
-    id        Int      @id @default(autoincrement())
-    email     String   @unique
-    name      String?
-    password  String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id            Int       @id @default(autoincrement())
+    email         String    @unique
+    name          String?
+    password      String
+    canDraw       Boolean   @default(true)
+    remainingDraw Int       @default(5)
+    lastDraw      DateTime? @updatedAt
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
 }
 
 model House {
@@ -21,6 +24,14 @@ model House {
     house     String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model OwnedCard {
+    id     Int    @id @default(autoincrement())
+    userid Int
+    slug   String
+    name   String
+    image  String
 }
 
 // migration en sql dans le dossier migrations

@@ -10,7 +10,7 @@ function generateAccessToken(email) {
     },
     process.env.TOKEN_SECRET,
     {
-      expiresIn: "3h",
+      expiresIn: "7d",
     }
   );
 }

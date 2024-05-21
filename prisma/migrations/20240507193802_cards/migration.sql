@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `User` ADD COLUMN `canDraw` BOOLEAN NOT NULL DEFAULT true,
+    ADD COLUMN `lastDraw` DATETIME(3) NULL,
+    ADD COLUMN `remainingDraw` INTEGER NOT NULL DEFAULT 5;
