@@ -26,24 +26,27 @@ class AuthenticationController {
 
       return res.status(200).json({ token });
     } catch (e) {
-
       return res.status(500).json({ message: e.message });
     }
   }
 
   async getMyProfile(req, res) {
-    let data = {};
-    const ownedCards = await prisma.ownedCard.findMany({ // owned
-      where: {
-        userid: req.user.id
-      }
-    })
+    try {
+      let data = {};
+      const ownedCards = await prisma.ownedCard.findMany({
+        where: {
+          userid: req.user.id,
+        },
+      });
 
-    data["user"] = req.user
-    data["ownedCards"] = ownedCards
-    console.log(data)
+      data["user"] = req.user;
+      data["ownedCards"] = ownedCards;
+      //console.log(data);
 
-    return res.status(200).json(data) // on retourne un objet contenant les valeurs de user et ownedCards 
+      return res.status(200).json(data); // on retourne un objet contenant les valeurs de user et ownedCards
+    } catch (e) {
+      return res.status(500).json({ message: e.message });
+    }
   }
 }
 

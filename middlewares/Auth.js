@@ -16,7 +16,7 @@ function authMiddleware(req, res, next) {
 
   jwt.verify(token, process.env.TOKEN_SECRET, async (err, payload) => {
     // payload : data stocké dans le token
-    console.log(err);
+    //console.log(err);
 
     if (err) {
       return res.sendStatus(403);

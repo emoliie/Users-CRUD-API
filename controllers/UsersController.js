@@ -17,7 +17,7 @@ class UsersController {
   // STORE : Create a new user
   async store(req, res) {
     const body = req.body;
-    console.log(body);
+    //console.log(body);
     try {
       const encryptedPassword = await hashPassword(body.password);
       const user = await prisma.user.create({
@@ -30,7 +30,7 @@ class UsersController {
 
       return res.status(201).json(user);
     } catch (e) {
-      console.log(e);
+      //console.log(e);
       return res.status(500).json({ message: e.message });
     }
   }

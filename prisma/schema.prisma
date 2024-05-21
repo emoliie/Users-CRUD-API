@@ -14,9 +14,8 @@ model User {
     password      String
     canDraw       Boolean   @default(true)
     remainingDraw Int       @default(5)
-    lastDraw      DateTime? @updatedAt
+    lastDraw      DateTime? 
     createdAt     DateTime  @default(now())
-    updatedAt     DateTime  @updatedAt
 }
 
 model House {

@@ -42,7 +42,7 @@ class HousesController {
   async updateHouse(req, res) {
     // Method: PUT ou PATCH
     const body = req.body;
-    console.log(body);
+    //console.log(body);
     const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
     
     try {

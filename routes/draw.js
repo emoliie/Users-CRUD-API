@@ -1,7 +1,6 @@
 const express = require("express");
 const prisma = require("../config/prisma");
 const { authMiddleware } = require("../middlewares/Auth.js");
-const { getCard } = require("../utils/card"); // à utiliser
 const { randomCard } = require("../utils/card");
 
 const router = express.Router();
@@ -9,7 +8,7 @@ const router = express.Router();
 router.use(authMiddleware);
 
 router.post("/cards/draw", async (req, res) => {
-  console.log(req.user);
+  //console.log(req.user);
   /**
    * 1. Vérification qu'il est authentifié (JWT Middleware), ligne 12
    * 2. Vérification qu'il puisse piocher
@@ -26,13 +25,15 @@ router.post("/cards/draw", async (req, res) => {
 
   const card = await randomCard(); // on obtient un tableau avec des objets
   remainingDraw = remainingDraw - 5;
+  let lastDraw = new Date().toJSON(); // update la date à la date et horaire actuelle en format json 
 
+  //console.log(lastDraw);
   const updatedUser = await prisma.user.update({
     where: { id: user.id },
-    data: { remainingDraw, canDraw: false }, // == { remainingDraw: remainingDraw }
+    data: { remainingDraw, canDraw: false, lastDraw}, // == { remainingDraw: remainingDraw }
   });
 
-  console.log(card);
+  //console.log(card);
 
   const data = [];
 
